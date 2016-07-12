@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tinker's Construct Tool Builder Helper</title>
+        <script type="text/javascript" src="buckets-minified.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="select2.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="select2.css">
+        <script type="text/javascript" src="version_dictionary.js"></script>
+        <script type="text/javascript" src="tinkerplanner.js"></script>
+        <link rel="stylesheet" href="tinkerplanner.css">
+        <style type="text/css">
+            .select2-container .select2-choice {
+                height: 44px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Tinker's Construct Tool builder Helper</h2>
+        <table>
+	<thead>
+            <tr>
+            <td><label>Version:</label></td>
+            <td><select id="version"></select></td>
+            </tr>
+        </thead>
+        <tr>
+            <td><span class="f1">Tool</span></td>
+            <td><input type=hidden id="toolSel"></input></td>
+        </tr>
+        <tr id="main_material">
+            <td><span class="f1" id="material1">Material1</span></td>
+            <td><input type=hidden id="toolMat1"></input></td>
+        </tr>
+        <tr id="main_material">
+            <td><span class="f1" id="material2">Material1</span></td>
+            <td><input type=hidden id="toolMat2"></input></td>
+        </tr>
+        <tr id="main_material">
+            <td><span class="f1" id="material3">Material1</span></td>
+            <td><input type=hidden id="toolMat3"></input></td>
+        </tr>
+        <tr id="extra_material">
+            <td><span class="f1" id="material4" >Material1</span></td>
+            <td><input type=hidden id="toolMat4"></input></td>
+        </tr>
+        </table>
+
+        <h3 style="margin-top:10px">Statistics</h3>
+        <table>
+            <tr>
+                <td><div class="stat_item">Durability:</div></td>
+                <td><div id="stat_durability">---</div></td>
+            </tr>
+             <tr>
+                <td><div class="stat_item">Harvest Level:</div></td>
+                <td><div id="stat_harvest">---</div></td>
+            </tr>
+            <tr>
+                <td><div class="stat_item">Speed:</div></td>
+                <td><div id="stat_speed">---</div></td>
+            </tr>
+            <tr>
+                <td><div class="stat_item">Attack:</div></td>
+                <td><div id="stat_attack">---</div></td>
+            </tr>
+        </table>
+        <br>
+        <input id="popup_tool_data" type="button" value="Get Popup" />
+        
+        
+        <h3 style="margin-top:10px">Help</h3>
+        <p>This script helps you with your Tinker's Tool setups.</p>
+        <p><a href="http://minecraft.curseforge.com/projects/tinkers-construct">Tinkers' Construct mod page</a></p>
+        <p><a href="https://github.com/SlimeKnights/TinkersConstruct">Tinkers' Construct source repository</a></p>
+        <p>If you find this helpful and wish to donate, please support the Tinkers' Construct mod developers at the above links</p>
+                
+        <p style="size:small;color:#666;margin-top:10px;">This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" style="color:#55a;">Creative Commons Attribution 4.0 License</a>. Sources can be found in the <a href="https://github.com/cjo9900/tinkers_planner/tree/gh-pages" style="color:#55a;">github repository</a>.</p>
+    </body>
+</html>
+
