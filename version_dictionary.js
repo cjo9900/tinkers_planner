@@ -1,7 +1,7 @@
 var version_dictionary = {
 	"2.3.3": {
                 "tools": {
-                    "hammer": {
+                    hammer: {
                         "parts": [
                             "Hammer Head",
                             "Plate",
@@ -34,7 +34,7 @@ var version_dictionary = {
                                 return mat1 + "-" + mat2 +"-"+ mat3 + " Hammer";
                             }
                         },
-                    "pickaxe": {
+                    pickaxe: {
                         "parts": [
                             "Pick Head",
                             "Binding",
@@ -46,7 +46,7 @@ var version_dictionary = {
                             {
                                 dur *= mat1.head_trait_multiplier;
                             }
-                            return dur;
+                            return Math.max(1,dur);
                             },
                         "speed":function(mat1, mat2, mat3, mat4){
                             // only head counts
@@ -63,7 +63,7 @@ var version_dictionary = {
                                 return mat1 + " Pickaxe";
                             }
                         },
-                    "hatchet": {
+                    hatchet: {
                         "parts": [
                             "Axe Head",
                             "Binding",
@@ -81,6 +81,190 @@ var version_dictionary = {
                             },
                         getHarvestlevel:function(mat1, mat2, mat3, mat4){
                                 return mat1.harvest;
+                            },
+                        getName:function(mat1, mat2, mat3){
+                                return mat1 + " Hatchet";
+                            }
+                        },
+                    lumberaxe: {
+                        "parts": [
+                            "Axe Head",
+                            "Plate",
+                            "Tough Binding",
+                            "Tough Tool Rod"
+                            ],
+                        "durability":function(mat1, mat2, mat3, mat4){
+                                var dur = Math.max(1, ((mat1.durability + mat2.durability)/2));
+                                dur += mat3.extra_durability;
+                                dur = 2*(Math.max(1, Math.round((dur)*mat4.handle_factor) + mat4.handle_durability));
+                                var x = false; //make sure to only apply head_trait_multiplier once but this will fail if there are differnt head traits
+                                if(mat1.hasOwnProperty("head_trait_multiplier")) { dur *= mat1.head_trait_multiplier; x = true; }
+                                if(mat2.hasOwnProperty("head_trait_multiplier") && !x) { dur *= mat2.head_trait_multiplier; x = true; }
+                                return dur;
+                                // 2.5 is fixed multipler
+                            },
+                        "speed":function(mat1, mat2, mat3, mat4){
+                                return ((mat1.speed + mat2.speed )/2)* 0.35;
+                                // 0.35 is the miningSpeedModifier
+                            },
+                        "attack": function(mat1, mat2, mat3, mat4){
+                            //incorrect???
+                                return 1.0 + (((mat1.attack + mat2.attack)/2)*1.2);
+                                // 1.2 is the damagePotential
+                            },
+                        getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                                return Math.max(mat1.harvest,mat2.harvest);
+                            },
+                        getName:function(mat1, mat2, mat3){
+                                return mat1 + "-" + mat2 + " Lumberaxe";
+                            }
+                        },
+                    broadsword : {
+                        parts: [
+                        "Sword Blade",
+                        "Wide Guard",
+                        "Tool Rod"
+                        ],
+                    "durability":function(mat1, mat2, mat3, mat4){
+                        var dur = Math.max(1, Math.round((mat1.durability + mat2.extra_durability)*mat3.handle_factor) + mat3.handle_durability);
+                        if(mat1.hasOwnProperty("head_trait_multiplier"))
+                        {
+                            dur *= mat1.head_trait_multiplier;
+                        }
+                        dur *= 1.1;
+                        return Math.max(dur, 1);
+                        },
+                    "speed":function(mat1, mat2, mat3, mat4){
+                        return 0.5 * mat1.speed;
+                        },
+                    "attack": function(mat1, mat2, mat3, mat4){
+                            return 1.0 + 1.0 + (mat1.attack * 1.0);
+                        },
+                    getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                            return mat1.harvest;
+                        },
+                    getName:function(mat1, mat2, mat3){
+                            return mat1 + " Broadsword";
+                        }
+                    },
+                    cleaver : {
+                        parts: [
+                        "Large Sword Blade",
+                        "Plate",
+                        "Tough Tool Rod (Guard)",
+                        "Tough Tool Rod (Handle)"
+                        ],
+                    "durability":function(mat1, mat2, mat3, mat4){
+                            var dur = Math.max(1, ((mat1.durability + mat2.durability )/2));
+                                 dur += mat4.extra_durability;
+                            dur = 2*(Math.max(1, Math.round((dur)*mat4.handle_factor) + mat4.handle_durability));
+                            var x = false; //make sure to only apply head_trait_multiplier once but this will fail if there are differnt head traits
+                            if(mat1.hasOwnProperty("head_trait_multiplier")) { dur *= mat1.head_trait_multiplier; x = true; }
+                            if(mat2.hasOwnProperty("head_trait_multiplier") && !x) { dur *= mat2.head_trait_multiplier; x = true; }
+                            return dur;
+
+                        var dur = Math.max(1, Math.round((mat1.durability + mat2.extra_durability)*mat3.handle_factor) + mat3.handle_durability);
+                        if(mat1.hasOwnProperty("head_trait_multiplier"))
+                        {
+                            dur *= mat1.head_trait_multiplier;
+                        }
+                        return Math.max(dur*1.1, 1);
+                        },
+                    "speed":function(mat1, mat2, mat3, mat4){
+                        return 0.2 * ((mat1.speed + mat2.speed)/2);
+                        },
+                    "attack": function(mat1, mat2, mat3, mat4){
+                            return 1.0 + (2 + 1.4*(((mat1.attack + mat2.attack)/2)))*1.2;
+                        },
+                    getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                            return Math.max(mat1.harvest,mat2.harvest);
+                        },
+                    getName:function(mat1, mat2, mat3){
+                            return mat1 + " Cleaver";
+                        }
+                    },
+                    shovel: {
+                        "parts": [
+                            "Shovel Head",
+                            "Binding",
+                            "Tool Rod"
+                            ],
+                        "durability":function(mat1, mat2, mat3, mat4){
+                            var dur = Math.max(1, Math.round((mat1.durability + mat2.extra_durability)*mat3.handle_factor) + mat3.handle_durability);
+                            if(mat1.hasOwnProperty("head_trait_multiplier"))
+                            {
+                                dur *= mat1.head_trait_multiplier;
+                            }
+                            return Math.max(1,dur);
+                            },
+                        "speed":function(mat1, mat2, mat3, mat4){
+                            // only head counts
+                            return mat1.speed;
+                            },
+                        "attack":function(mat1, mat2, mat3, mat4){
+                            // only head counts
+                            return 1.0 + (mat1.attack*0.9);
+                            },
+                        getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                                return mat1.harvest;
+                            },
+                        getName:function(mat1, mat2, mat3){
+                                return mat1 + " Shovel";
+                            }
+                        },
+                    excavator: {
+                        "parts": [
+                            "Excavator Head",
+                            "Plate",
+                            "Tough Binding",
+                            "Tough Tool Rod"
+                            ],
+                        // head and plates are treated as heads, with head double weighted
+                        "durability":function(mat1, mat2, mat3, mat4){
+                                var dur = Math.max(1, ((mat1.durability + mat2.durability)/2));
+                                dur += mat3.extra_durability;
+                                dur = 1.75*(Math.max(1, Math.round((dur)*mat4.handle_factor) + mat4.handle_durability));
+                                var x = false; //make sure to only apply head_trait_multiplier once but this will fail if there are differnt head traits
+                                if(mat1.hasOwnProperty("head_trait_multiplier")) { dur *= mat1.head_trait_multiplier; x = true; }
+                                if(mat2.hasOwnProperty("head_trait_multiplier") && !x) { dur *= mat2.head_trait_multiplier; x = true; }
+                                return dur;
+                                // 1.75 is fixed multipler
+                            },
+                        "speed":function(mat1, mat2, mat3, mat4){
+                                return ((mat1.speed + mat2.speed )/2)* 0.28;
+                                // 0.28 is the miningSpeedModifier
+                            },
+                        "attack": function(mat1, mat2, mat3, mat4){
+                            // not correct???
+                                return 1.0 + (((mat1.attack + mat2.attack)/2)*1.25);
+                            },
+                        getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                                return Math.max(mat1.harvest,mat2.harvest);
+                            },
+                        getName:function(mat1, mat2, mat3){
+                                return mat1 + "-" + mat2 +"-"+" Excavator";
+                            }
+                        },
+                    mattock: {
+                        "parts": [
+                            "Axe Head",
+                            "ShovelHead",
+                            "Tool Rod"
+                            ],
+                        "durability":function(mat1, mat2, mat3, mat4){
+                            return Math.max(1, Math.round(((mat1.durability + mat2.durability)/2)*mat3.handle_factor) + mat3.handle_durability);
+                            },
+                        "speed":function(mat1, mat2, mat3, mat4){
+                            return 0.95*((mat1.speed + mat2.speed)/2);
+                            },
+                        "attack": function(mat1, mat2, mat3, mat4){
+                                return 1.0 + ((3+(mat1.attack + mat2.attack)/2 )* 0.9);
+                            },
+                        getHarvestlevel:function(mat1, mat2, mat3, mat4){
+                                return mat1.harvest;
+                            },
+                        getHarvestlevel2:function(mat1, mat2, mat3, mat4){
+                                return mat2.harvest;
                             },
                         getName:function(mat1, mat2, mat3){
                                 return mat1 + " Hatchet";

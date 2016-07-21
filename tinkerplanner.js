@@ -141,10 +141,14 @@ $(function(){
             mat2 = materials[$('#toolMat2').select2("val")];
             mat3 = materials[$('#toolMat3').select2("val")];
             mat4 = materials[$('#toolMat4').select2("val")];
-            
+            var harv = current_dictionary["harvestlevels"][tool.getHarvestlevel(mat1,mat2,mat3,mat4)];
+            if (tool.hasOwnProperty("getHarvestlevel2"))
+            {
+                harv += "/" + current_dictionary["harvestlevels"][tool.getHarvestlevel2(mat1,mat2,mat3,mat4)];
+            }
             document.getElementById("stat_durability").innerHTML = Math.round(tool.durability(mat1,mat2,mat3,mat4));
             document.getElementById("stat_speed").innerHTML = tool.speed(mat1,mat2,mat3,mat4).toFixed(2);
-            document.getElementById("stat_harvest").innerHTML = current_dictionary["harvestlevels"][tool.getHarvestlevel(mat1,mat2,mat3,mat4)];
+            document.getElementById("stat_harvest").innerHTML = harv;
             document.getElementById("stat_attack").innerHTML = tool.attack(mat1,mat2,mat3,mat4).toFixed(2);
             
             
@@ -191,8 +195,14 @@ $(function(){
 		$('#'+id).append('<li id="stats_title">Stats</li>');
 
                 var rtable = '<table>';
+                var harv = current_dictionary["harvestlevels"][tool.getHarvestlevel(mat1,mat2,mat3,mat4)];
+                if (tool.hasOwnProperty("getHarvestlevel2"))
+                {
+                    harv += "/" + current_dictionary["harvestlevels"][tool.getHarvestlevel2(mat1,mat2,mat3,mat4)];
+                }
+                
                 rtable = $(rtable).append('<tr><td><div class="stat_item">Durability:</div></td><td><div id="stat_durability">' +Math.round(tool.durability(mat1,mat2,mat3,mat4))+'</div></td></tr>');
-                rtable = $(rtable).append('<tr><td><div class="stat_item">Harvest Level:</div></td><td><div id="stat_harvest">'+current_dictionary["harvestlevels"][tool.getHarvestlevel(mat1,mat2,mat3,mat4)]+'</div></td></tr>');
+                rtable = $(rtable).append('<tr><td><div class="stat_item">Harvest Level:</div></td><td><div id="stat_harvest">'+harv+'</div></td></tr>');
                 rtable = $(rtable).append('<tr><td><div class="stat_item">Speed:</div></td><td><div id="stat_speed">'+tool.speed(mat1,mat2,mat3,mat4).toFixed(2)+'</div></td></tr>');
                 rtable = $(rtable).append('<tr><td><div class="stat_item">Attack:</div></td><td><div id="stat_attack">'+tool.attack(mat1,mat2,mat3,mat4).toFixed(2)+'</div></td></tr>');
                 rtable = $(rtable).append('</table>');
